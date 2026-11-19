@@ -63,6 +63,9 @@ public class InicioVista extends BaseFrame {
         btnSalir.setForeground(Color.WHITE);
         btnSalir.setFont(Estilo.fuente_boton);
         btnSalir.setOpaque(true);
+        
+        lblTitulo.setFont(Estilo.fuente_titulo);
+        
         // acciones
         btnIngresar.addActionListener(e -> {
             dispose();

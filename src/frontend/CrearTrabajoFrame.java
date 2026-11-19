@@ -18,7 +18,7 @@ public class CrearTrabajoFrame extends BaseFrame {
     private JLabel lblExtra;
     private JTextField txtObservaciones;
     public CrearTrabajoFrame(menu backend) {
-        super("Crear Trabajo", backend);
+        super("crear trabajo", backend);
         setSize(520, 620);
     }
 
@@ -38,9 +38,9 @@ public class CrearTrabajoFrame extends BaseFrame {
         //  tipo vehiiculo
         JPanel panelTipo = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         panelTipo.setBackground(Estilo.color_fondo);
-        rbAuto = new JRadioButton("Auto", true);
-        rbMoto = new JRadioButton("Moto");
-        rbCamioneta = new JRadioButton("Camioneta");
+        rbAuto = new JRadioButton("auto", true);
+        rbMoto = new JRadioButton("moto");
+        rbCamioneta = new JRadioButton("camioneta");
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(rbAuto);
         grupo.add(rbMoto);
@@ -58,7 +58,7 @@ public class CrearTrabajoFrame extends BaseFrame {
         txtModelo = new JTextField();
         cbMotor = new JComboBox<>(tipovehiculo.values());
         txtAnio = new JTextField();
-        lblExtra = new JLabel("Cantidad de puertas:");
+        lblExtra = new JLabel("cantidad de puertas:");
         txtExtra = new JTextField();
         txtRut = new JTextField();
         txtNombre = new JTextField();
@@ -69,46 +69,46 @@ public class CrearTrabajoFrame extends BaseFrame {
         }
         txtCosto = new JTextField();
 
-        panel.add(new JLabel("Tipo:"));         
+        panel.add(new JLabel("tipo:"));         
         panel.add(panelTipo);
-        panel.add(new JLabel("Patente:"));      
+        panel.add(new JLabel("patente:"));      
         panel.add(txtPatente);
-        panel.add(new JLabel("Marca:"));        
+        panel.add(new JLabel("marca:"));        
         panel.add(txtMarca);
-        panel.add(new JLabel("Modelo:"));       
+        panel.add(new JLabel("modelo:"));       
         panel.add(txtModelo);
-        panel.add(new JLabel("Tipo de motor:"));
+        panel.add(new JLabel("tipo de motor:"));
         panel.add(cbMotor);
-        panel.add(new JLabel("Año:"));          
+        panel.add(new JLabel("anio:"));          
         panel.add(txtAnio);
         panel.add(lblExtra);                    
         panel.add(txtExtra);
-        panel.add(new JLabel("RUT cliente:"));  
+        panel.add(new JLabel("rut cliente:"));  
         panel.add(txtRut);
-        panel.add(new JLabel("Nombre cliente:"));
+        panel.add(new JLabel("nombre cliente:"));
         panel.add(txtNombre);
-        panel.add(new JLabel("Teléfono:"));     
+        panel.add(new JLabel("telefono:"));     
         panel.add(txtTelefono);
-        panel.add(new JLabel("Trabajador:"));   
+        panel.add(new JLabel("trabajador:"));   
         panel.add(cbMecanico);
-        panel.add(new JLabel("Costo trabajo:"));
+        panel.add(new JLabel("costo trabajo:"));
         panel.add(txtCosto);
         txtObservaciones = new JTextField();
-        panel.add(new JLabel("Observaciones:")); panel.add(txtObservaciones);
+        panel.add(new JLabel("observaciones:")); panel.add(txtObservaciones);
         add(panel, BorderLayout.CENTER);
 
         // mas botones
         JPanel panelSur = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSur.setBackground(Estilo.color_fondo);
 
-        JButton btnVolver = new JButton("Volver");
+        JButton btnVolver = new JButton("volver");
         btnVolver.setFont(Estilo.fuente_boton);
         btnVolver.addActionListener(e -> {
             dispose();
             new InicioVista(backend).mostrar();
         });
 
-        JButton btnRegistrar = new JButton("Registrar");
+        JButton btnRegistrar = new JButton("registrar");
         btnRegistrar.setBackground(Estilo.color_principal);
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setFont(Estilo.fuente_boton);
@@ -132,15 +132,15 @@ public class CrearTrabajoFrame extends BaseFrame {
         String telefono = txtTelefono.getText().trim();
 
         if (patente.isEmpty() || marca.isEmpty() || modelo.isEmpty() || rut.isEmpty() || nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Complete los campos vacíos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "complete los campos vacíos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (backend.getMecanicos().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay trabajadores registrados", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "no hay trabajadores registrados", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int r = JOptionPane.showConfirmDialog(this, "registrar trabajo para " + patente + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(this, "registrar trabajo para " + patente + "?", "confirmar", JOptionPane.YES_NO_OPTION);
         if (r != JOptionPane.YES_OPTION) return;
 
         try {
@@ -168,9 +168,9 @@ public class CrearTrabajoFrame extends BaseFrame {
                 "\nTrabajador: " + mec.getNombre());
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Año, dato extra y costo deben ser números.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "anio, dato extra y costo deben ser números.", "error", JOptionPane.ERROR_MESSAGE);
         } catch (PatenteDupliException | AnioInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, "Error al registrar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "error al registrar: " + ex.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
