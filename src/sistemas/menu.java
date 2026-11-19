@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList; 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Scanner;
+
 import modelos.*;
 import vehiculo.auto;
 import vehiculo.camioneta;
@@ -27,11 +27,11 @@ public class menu {
     private double totalVentas = 0.0;
     
     // [REQUISITO: Scanner]
-    private Scanner sc = new Scanner(System.in);
+    //elimine el scanner 
     
     public menu() {
     }
-    
+ /*
     // [REQUISITO: Scanner]
     public void iniciar() {
         cargar();
@@ -73,12 +73,18 @@ public class menu {
         } while (opcion != 0);
         guardar();
     }
-
+*/
+    
+    
+/*
     @SuppressWarnings("empty-statement")
     private void administrarVehiculos() {
     administrarVehiculos(new ArrayList<>(lista));
 }
+*/
 
+
+/*
 private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
     if (vistaVehiculos.isEmpty()) {
         System.out.println(" ");
@@ -112,8 +118,8 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
         return; 
     }
 }
-
-    
+*/
+/*    
     private void administrarClientes() {
         System.out.println("");
         System.out.println("=============================");
@@ -146,115 +152,35 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
         }
         System.out.println(" ");
     }
-
-    private void crearTrabajo() {
-        try {
-            System.out.println("");
-            System.out.println("=============================");
-            System.out.println("     Registrar vehiculo");
-            System.out.println("=============================");
-            System.out.println("");
-            System.out.print("Tipo 1. Auto | 2. Moto | 3. Camioneta: ");
-            int tipo = Integer.parseInt(sc.nextLine());
-            System.out.print("Patente: ");
-            String patente = sc.nextLine();
-
-            for (vehiculo vehiculo : lista) {
-                if (vehiculo.getPatente().equalsIgnoreCase(patente)) {
-                    throw new PatenteDupliException(patente);
-                }
+*/
+  
+    //modificacion crearTrabajo
+    
+    public ordenesdetrabajo crearTrabajo(vehiculo nuevovehiculo, String rutcliente, String nombrecliente, String telefonocliente, mecanico mecanicoseleccionado, double costotrabajo) throws PatenteDupliException {
+        for (vehiculo vehiculo : lista) {
+            if (vehiculo.getPatente().equalsIgnoreCase(nuevovehiculo.getPatente())) {
+                throw new PatenteDupliException(nuevovehiculo.getPatente());
             }
-
-            System.out.print("Marca: ");
-            String marca = sc.nextLine();
-            System.out.print("Modelo: ");
-            String modelo = sc.nextLine();
-            System.out.print("Tipo de motor (1= Bencinero, 2= Diesel, 3= Hibrido, 4= Electrico): ");
-            int opcMotor = Integer.parseInt(sc.nextLine()); 
-            tipovehiculo motorSeleccionado = tipovehiculo.BENCINERO; 
-            System.out.print("Anio: ");
-            int anio = Integer.parseInt(sc.nextLine());
-            
-            switch (opcMotor) {
-                case 2:
-                    motorSeleccionado = tipovehiculo.DIESEL;
-                    break;
-                case 3:
-                    motorSeleccionado = tipovehiculo.HIBRIDO;
-                    break;
-                case 4:
-                    motorSeleccionado = tipovehiculo.ELECTRICO;
-                    break;
-                default:
-                    break;
-            }
-
-            vehiculo nuevovehiculo = null;
-            switch (tipo) {
-                case 1:
-                    System.out.print("Cantidad de puertas: ");
-                    nuevovehiculo = new auto(patente, marca, modelo, anio, motorSeleccionado, Integer.parseInt(sc.nextLine()));
-                    break;
-                case 2:
-                    System.out.print("cc: ");
-                    nuevovehiculo = new moto(patente, marca, modelo, anio, motorSeleccionado, Integer.parseInt(sc.nextLine()));
-                    break;
-                default:
-                    System.out.print("Capacidad de carga (en kg): ");
-                    nuevovehiculo = new camioneta(patente, marca, modelo, anio, motorSeleccionado, Integer.parseInt(sc.nextLine()));
-                    break;
-            }
-            lista.add(nuevovehiculo);
-
-            System.out.println(" ");
-            System.out.println("Asignar cliente");
-            System.out.print("Ingrese rut del cliente: ");
-            String rutcliente = sc.nextLine();
-
-            // [REQUISITO: Hashmap]
-            cliente clienteseleccionado = clientes.get(rutcliente);
-
-            if (clienteseleccionado == null) {
-                System.out.println("Cliente no encontrado. Registrando cliente nuevo:");
-                System.out.print("Nombre completo: ");
-                String nombrecliente = sc.nextLine();
-                System.out.print("Telefono: ");
-                String telefonocliente = sc.nextLine();
-                clienteseleccionado = new cliente(rutcliente, nombrecliente, telefonocliente);
-                clientes.put(rutcliente, clienteseleccionado);
-            } else {
-                System.out.println("Cliente encontrado: " + clienteseleccionado.getNombre());
-            }
-
-            System.out.println(" ");
-            System.out.println("Asignar trabajador");
-            administrarTrabajadores();
-            System.out.print("Seleccione numero del trabajador: ");
-            int posicionmecanico = Integer.parseInt(sc.nextLine()) - 1;
-
-            if (posicionmecanico < 0 || posicionmecanico >= mecanicos.size()) {
-                System.out.println("Trabajador no valido.");
-                return;
-            }
-            mecanico mecanicoseleccionado = mecanicos.get(posicionmecanico);
-
-            System.out.print("Ingrese costo del trabajo: ");
-            double costotrabajo = Double.parseDouble(sc.nextLine());
-
-            ordenesdetrabajo nuevaorden = new ordenesdetrabajo(nuevovehiculo, mecanicoseleccionado, costotrabajo);
-            ordenes.add(nuevaorden);
-
-            System.out.println(" ");
-            System.out.println("Numero de Orden: " + nuevaorden.getNumeroorden());
-            System.out.println("Vehiculo: " + nuevovehiculo.getPatente());
-            System.out.println("Cliente: " + clienteseleccionado.getNombre());
-            System.out.println("Trabajador: " + mecanicoseleccionado.getNombre());
-
-        } catch (PatenteDupliException | AnioInvalidoException e) {
-            System.out.println("Error al registrar: " + e.getMessage());
         }
+
+        lista.add(nuevovehiculo);
+
+        // [REQUISITO: Hashmap]
+        cliente clienteseleccionado = clientes.get(rutcliente);
+        if (clienteseleccionado == null) {
+            clienteseleccionado = new cliente(rutcliente, nombrecliente, telefonocliente);
+            clientes.put(rutcliente, clienteseleccionado);
+        }
+
+        ordenesdetrabajo nuevaorden = new ordenesdetrabajo(nuevovehiculo, mecanicoseleccionado, costotrabajo);
+        ordenes.add(nuevaorden);
+
+        return nuevaorden;
     }
     
+ 
+    
+/*    
     private void administrarTrabajos() {
         System.out.println(" ");
         System.out.println("Historial de trabajos");
@@ -292,177 +218,46 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
             System.out.println("Numero de trabajo no valido");
         }
     }
+*/
+    
+    public boolean venderRepuesto(ordenesdetrabajo otAsociada, repuesto repSel, int cant) {
+       if (repSel == null || cant <= 0 || cant > repSel.getStock()) {
+           return false;
+       }
+       repSel.disminuirStock(cant);
+       if (otAsociada != null) {
+           for (int k = 0; k < cant; k++) {
+               otAsociada.getRepuestosusado().add(repSel);
+           }
+           otAsociada.calcularCostoTotal();
+       } else {
+           totalVentas += repSel.getPrecio() * cant;
+       }
+       return true;
+   }
 
-    private void venderRepuesto() {
-    if (repuestos.isEmpty()) {
-        System.out.println("No hay repuestos en el sistema.");
-        return;
+    
+    
+    public void crearTrabajador(String rut, String nombre, String cargo) {
+        mecanicos.add(new mecanico(rut, nombre, cargo));
+    }
+    
+    public void crearRepuesto(String codigo, String nombre, double precio, int stock) {
+        repuestos.add(new repuesto(codigo, nombre, precio, stock));
     }
 
-    System.out.println("\n--- Venta de repuestos ---");
-    System.out.println("1. Venta directa por mostrador");
-    System.out.println("2. Cargar repuesto a una Orden de Trabajo");
-    System.out.print("Seleccione tipo de venta: ");
-    
-    String modo = sc.nextLine().trim();
-    ordenesdetrabajo otAsociada = null;
-
-    if (modo.equals("2")) {
-        if (ordenes.isEmpty()) {
-            System.out.println("No hay ordenes de trabajo registradas. Se procedera como venta directa.");
-        } else {
-            System.out.println("\nOrdenes de trabajo disponibles:");
-            for (int i = 0; i < ordenes.size(); i++) {
-                ordenesdetrabajo ot = ordenes.get(i);
-                String pat = (ot.getVehiculo() != null) ? ot.getVehiculo().getPatente() : "S/I";
-                System.out.println((i + 1) + ". " + ot.getNumeroorden() + 
-                                   " [Vehiculo: " + pat + " | Estado: " + ot.getEstado() + 
-                                   " | Costo actual: $" + (int)ot.getCostoTotal() + "]");
-            }
-            System.out.print("Seleccione numero de Orden de Trabajo: ");
-            try {
-                int posOt = Integer.parseInt(sc.nextLine()) - 1;
-                if (posOt >= 0 && posOt < ordenes.size()) {
-                    otAsociada = ordenes.get(posOt);
-                    System.out.println("Seleccionada orden: " + otAsociada.getNumeroorden());
-                } else {
-                    System.out.println("Seleccion invalida. Se continuara como venta directa.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada invalida. Se continuara como venta directa.");
+    public vehiculo buscarVehiculo(String patente) {
+        for (vehiculo v : lista) {
+            if (v.getPatente().equalsIgnoreCase(patente)) {
+                return v;
             }
         }
+        return null;
     }
-
-    boolean continuar = true;
-    double subtotalVenta = 0.0;
-
-    while (continuar) {
-        System.out.println("\nCatalogo de repuestos:");
-        for (int i = 0; i < repuestos.size(); i++) {
-            repuesto r = repuestos.get(i);
-            System.out.println((i + 1) + ". " + r.getNombre() + " - $" + (int)r.getPrecio() + " [Stock actual: " + r.getStock() + "]");
-        }
-
-        System.out.print("Seleccione repuesto (0 para terminar): ");
-        try {
-            int eleccion = Integer.parseInt(sc.nextLine());
-            if (eleccion == 0) break;
-
-            if (eleccion < 1 || eleccion > repuestos.size()) {
-                System.out.println("Opcion no valida.");
-                continue;
-            }
-
-            repuesto repSel = repuestos.get(eleccion - 1);
-            System.out.print("Cantidad: ");
-            int cant = Integer.parseInt(sc.nextLine());
-
-            if (cant > repSel.getStock()) {
-                System.out.println("Stock insuficiente.");
-            } else if (cant <= 0) {
-                System.out.println("La cantidad debe ser mayor a 0.");
-            } else {
-                repSel.disminuirStock(cant);
-                double subtotal = repSel.getPrecio() * cant;
-
-                if (otAsociada != null) {
-                    for (int k = 0; k < cant; k++) {
-                        otAsociada.getRepuestosusado().add(repSel);
-                    }
-                    otAsociada.calcularCostoTotal();
-                    System.out.println("-> Cargado a " + otAsociada.getNumeroorden() + ": " + cant + "x " + repSel.getNombre() + 
-                                       " ($" + (int)subtotal + "). Nuevo costo del trabajo: $" + (int)otAsociada.getCostoTotal());
-                } else {
-                    subtotalVenta += subtotal;
-                    totalVentas += subtotal;
-                    System.out.println("-> Anadido a venta directa: " + cant + "x " + repSel.getNombre() + " = $" + (int)subtotal);
-                }
-            }
-
-            System.out.print("Desea agregar otro repuesto? (s/n): ");
-            if (sc.nextLine().equalsIgnoreCase("n")) {
-                continuar = false;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Opcion no valida.");
-        }
+    public cliente consultarCliente(String rut) {
+        return clientes.get(rut.trim());
     }
-
-    System.out.println("\n=========================================");
-    if (otAsociada != null) {
-        System.out.println("Repuestos cargados exitosamente a la orden " + otAsociada.getNumeroorden() + ".");
-        System.out.println("Costo total final de la Orden de Trabajo: $" + (int)otAsociada.getCostoTotal());
-    } else {
-        System.out.println("Venta directa por mostrador finalizada.");
-        System.out.println("Monto total abonado: $" + (int)subtotalVenta);
-    }
-    System.out.println("=========================================");
-}
-
-
-    
-    
-    private void crearTrabajador() {
-        System.out.println(" "); 
-        System.out.println("====== Registrar trabajador ======");
-        System.out.print("Rut: "); 
-        String rut = sc.nextLine(); 
-        System.out.print("Nombre completo: "); String nombre = sc.nextLine(); 
-        System.out.print("Cargo: "); 
-        String cargo = sc.nextLine(); 
-        mecanicos.add(new mecanico(rut, nombre, cargo)); 
-        System.out.println("Trabajador registrado con exito"); 
-    }
-    
-    private void crearRepuesto() {
-        System.out.println(" "); 
-        System.out.println("====== Registrar repuesto ======"); 
-        System.out.print("Codigo: "); 
-        String codigo = sc.nextLine(); 
-        System.out.print("Nombre: "); 
-        String nombre = sc.nextLine(); 
-        System.out.print("Precio: $"); 
-        double precio = Double.parseDouble(sc.nextLine()); 
-        System.out.print("Stock inicial: "); 
-        int stock = Integer.parseInt(sc.nextLine()); 
-        repuestos.add(new repuesto(codigo, nombre, precio, stock)); 
-        System.out.println("Repuesto registrado con exito");
-    }
-
-    private void buscarVehiculo() {
-        System.out.println(" ");
-        System.out.println("====== Busqueda de vehiculo por patente ======"); 
-        System.out.print("Ingrese patente: "); 
-        String patente = sc.nextLine(); for (vehiculo v : lista) {
-            if (v.getPatente().equalsIgnoreCase(patente)) { 
-                System.out.println("Vehiculo encontrado:"); 
-                System.out.println(v.obtenerDescripcion()); 
-                System.out.println("Costo base: $" + (int) v.calcularCostoBase()); 
-                return; 
-            } 
-        } System.out.println("No se encontro ningun vehiculo con esa patente");
-    }
-    
-    private void consultarCliente(){
-        System.out.println(" ");
-        System.out.println("====== Consulta de cliente por rut ======");
-        System.out.print("Ingrese rut: ");
-        String rut = sc.nextLine();
-
-        cliente c = clientes.get(rut);
-    if (c == null) {
-        System.out.println("No se encontro ningun cliente con ese rut");
-        return;
-    }
-
-    System.out.println(" ");
-    System.out.println("Datos del cliente:");
-    System.out.println("Rut: " + c.getRut());
-    System.out.println("Nombre: " + c.getNombre());
-    System.out.println("Telefono: " + c.getTelefono());
-    }
-    
+/*    
     private void reporte() {
     double recTrabajos = 0.0;
     int pendiente = 0, reparacion = 0, finalizado = 0, cancelado = 0;
@@ -488,7 +283,7 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
     System.out.println("Ganancia total: $" + (int) (recTrabajos + totalVentas));
     System.out.println("");
     }
-    
+*/    
     // [REQUISITO: Persistencia]
     public void guardar() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(Archivo))) {
@@ -517,6 +312,7 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
             mecanicos = (ArrayList<mecanico>) in.readObject();
             ordenes = (ArrayList<ordenesdetrabajo>) in.readObject();
             totalVentas = (Double) in.readObject();
+            ordenesdetrabajo.setContadorordenes(ordenes.size() + 1);
             System.out.println("Cargado listo (" + lista.size() + " vehiculos).");
         } catch (Exception e) {
             System.out.println("Error al cargar");
@@ -544,4 +340,30 @@ private void administrarVehiculos(ArrayList<vehiculo> vistaVehiculos) {
     }
 
     }
+    
+    //nuevos getters y seters
+    
+    public ArrayList<vehiculo> getListaVehiculos() {
+        return lista;
+    }
+    public HashMap<String, cliente> getClientes() {
+        return clientes;
+    }
+    public ArrayList<mecanico> getMecanicos() {
+        return mecanicos;
+    }
+    public ArrayList<repuesto> getRepuestos() {
+        return repuestos;
+    }
+    public ArrayList<ordenesdetrabajo> getOrdenes() {
+        return ordenes;
+    }
+    public double getTotalVentas() {
+        return totalVentas;
+    }
+    
+    
+    
+    
+    
 }

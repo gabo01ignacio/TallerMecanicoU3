@@ -6,10 +6,7 @@ import sistemas.registros;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 
 /**
  *
@@ -31,7 +28,13 @@ public class ordenesdetrabajo implements Serializable, registros {
     private ArrayList<repuesto> repuestosusado;
     private estadoorden estado; 
     private double costoTotal;
-
+    //cambios 
+    private cliente cliente;
+    private String observaciones;
+    
+    
+    
+    
     public ordenesdetrabajo(vehiculo vehiculo, mecanico mecanicoasignado, double costomecanico) {
         this.numeroorden = "trabajo n" + contadorordenes++;
         this.vehiculo = vehiculo;
