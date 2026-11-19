@@ -30,9 +30,17 @@ public class ordenesdetrabajo implements Serializable, registros {
     private double costoTotal;
     //cambios 
     private cliente cliente;
-    private String observaciones;
+    private String observaciones = "";
     
+    public String getObservaciones() {
+    return observaciones;
+    }
     
+    public void setObservaciones(String Obs) {
+        this.observaciones=Obs;
+    }
+    
+
     
     
     public ordenesdetrabajo(vehiculo vehiculo, mecanico mecanicoasignado, double costomecanico) {
