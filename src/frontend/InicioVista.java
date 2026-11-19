@@ -2,13 +2,14 @@ package frontend;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import sistemas.menu;
 
 
 public class InicioVista extends BaseFrame {
     public InicioVista(menu backend) {
         super("Menú Principal", backend);
-        setSize(600, 400);
+        setSize(1280, 720);
     }
 
     @Override
@@ -16,6 +17,7 @@ public class InicioVista extends BaseFrame {
         setLayout(new BorderLayout(10, 10));
 
         JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 0, 0));
+        contenedorFilasBotones.setBorder(new EmptyBorder(200, 20, 200, 20));
 
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
