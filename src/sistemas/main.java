@@ -1,5 +1,5 @@
 package sistemas;
-import frontend.MenuPrincipalFrame;
+import frontend.InicioVista;
 import javax.swing.SwingUtilities;
 
 
@@ -13,7 +13,7 @@ public class main {
         menu aMenu = new menu();
         aMenu.cargar();
         SwingUtilities.invokeLater(() -> {
-            new MenuPrincipalFrame(aMenu).mostrar();
+            new InicioVista(aMenu).mostrar();
         });
     }
 }
