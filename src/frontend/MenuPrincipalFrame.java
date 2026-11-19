@@ -15,7 +15,6 @@ public class MenuPrincipalFrame extends BaseFrame {
         JPanel panel = new JPanel(new GridLayout(7, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(90, 120, 90, 120));
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
-        lblTitulo.setFont(fuente_titulo);
         JButton btnIngresar = new JButton("Ingresar Trabajo");
         JButton btnTienda = new JButton("Tienda Repuestos");
         JButton btnConsultas = new JButton("Consultas");
@@ -25,17 +24,6 @@ public class MenuPrincipalFrame extends BaseFrame {
       
         
         
-        JButton[] botones = {btnIngresar, btnTienda, btnConsultas, btnAdmin, btnBusqueda};
-        for (JButton b : botones) {
-            b.setBackground(color_principal);
-            b.setForeground(Color.WHITE);
-            b.setFont(fuente_boton);
-            b.setOpaque(true);
-        }
-        btnSalir.setBackground(color_rojo);
-        btnSalir.setForeground(Color.WHITE);
-        btnSalir.setFont(fuente_boton);
-        btnSalir.setOpaque(true);
         // acciones
         btnIngresar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "aa");
