@@ -5,60 +5,58 @@ import javax.swing.*;
 import sistemas.menu;
 
 public class MenuPrincipalFrame extends BaseFrame {
+
     public MenuPrincipalFrame(menu backend) {
-        super("Menú Principal", backend);
-        setSize(600, 400);
+        super("menu principal", backend);
+        setSize(600, 480);
     }
+
     @Override
     public void mostrar() {
         setLayout(new BorderLayout(10, 10));
-        JPanel panel = new JPanel(new GridLayout(7, 1, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(90, 120, 90, 120));
+
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
+        lblTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
+        add(lblTitulo, BorderLayout.NORTH);
+
+        JPanel panelCentro = new JPanel(new BorderLayout(10, 15));
+        panelCentro.setBorder(BorderFactory.createEmptyBorder(10, 120, 20, 120));
+
+        JPanel panelGridBotones = new JPanel(new GridLayout(5, 1, 10, 10));
+
         JButton btnIngresar = new JButton("Ingresar Trabajo");
         JButton btnTienda = new JButton("Tienda Repuestos");
         JButton btnConsultas = new JButton("Consultas");
         JButton btnAdmin = new JButton("Administración");
         JButton btnBusqueda = new JButton("Búsqueda y Reportes");
+
+        panelGridBotones.add(btnIngresar);
+        panelGridBotones.add(btnTienda);
+        panelGridBotones.add(btnConsultas);
+        panelGridBotones.add(btnAdmin);
+        panelGridBotones.add(btnBusqueda);
+
         JButton btnSalir = new JButton("Guardar y Salir");
-      
-        
-        
-        // acciones
-        btnIngresar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "aa");
-        });
+
+        btnIngresar.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnTienda.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnConsultas.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnAdmin.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnBusqueda.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
+
         btnSalir.addActionListener(e -> {
-            int r = JOptionPane.showConfirmDialog(this, "guardar y salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            int r = JOptionPane.showConfirmDialog(this, "¿guardar y salir?", "confirmar", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
                 backend.guardar();
                 System.exit(0);
             }
         });
-        panel.add(lblTitulo);
-        panel.add(btnIngresar);
-        panel.add(btnTienda);
-        panel.add(btnConsultas);
-        panel.add(btnAdmin);
-        panel.add(btnBusqueda);
-        panel.add(btnSalir);
-        add(panel);
-        
-        
-        
+
+        panelCentro.add(panelGridBotones, BorderLayout.CENTER);
+        panelCentro.add(btnSalir, BorderLayout.SOUTH);
+        add(panelCentro, BorderLayout.CENTER);
+
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    }
-
-
-
-
-
-
-
-
+}
