@@ -14,11 +14,6 @@ public class MenuPrincipalFrame extends BaseFrame {
         setLayout(new BorderLayout(10, 10));
         JPanel panel = new JPanel(new GridLayout(7, 1, 10, 10));
         panel.setBackground(color_fondo);
-        
-        //margenes
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 120, 20, 120));
-        
-        
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
         lblTitulo.setFont(fuente_titulo);
         JButton btnIngresar = new JButton("Ingresar Trabajo");

@@ -3,6 +3,10 @@ import frontend.MenuPrincipalFrame;
 import javax.swing.SwingUtilities;
 
 
+/**
+ *
+ * @author 4rtur
+ */
 
 public class main {
     public static void main(String[] args) {
