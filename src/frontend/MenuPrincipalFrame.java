@@ -14,15 +14,14 @@ public class MenuPrincipalFrame extends BaseFrame {
     @Override
     public void mostrar() {
         setLayout(new BorderLayout(10, 10));
-
+        JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 10, 10));
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         add(lblTitulo, BorderLayout.NORTH);
 
-        JPanel panelCentro = new JPanel(new BorderLayout(10, 15));
-        panelCentro.setBorder(BorderFactory.createEmptyBorder(10, 120, 20, 120));
-
-        JPanel panelGridBotones = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel panelGridBotones1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
+        JPanel panelGridBotones2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
+        JPanel exitLayout = new JPanel(new FlowLayout(FlowLayout.CENTER, 30,0));
 
         JButton btnIngresar = new JButton("Ingresar Trabajo");
         JButton btnTienda = new JButton("Tienda Repuestos");
@@ -30,13 +29,20 @@ public class MenuPrincipalFrame extends BaseFrame {
         JButton btnAdmin = new JButton("Administración");
         JButton btnBusqueda = new JButton("Búsqueda y Reportes");
 
-        panelGridBotones.add(btnIngresar);
-        panelGridBotones.add(btnTienda);
-        panelGridBotones.add(btnConsultas);
-        panelGridBotones.add(btnAdmin);
-        panelGridBotones.add(btnBusqueda);
+        Dimension btnSize = new Dimension(300, 50);
+        panelGridBotones1.add(btnIngresar);
+        btnIngresar.setPreferredSize(btnSize);
+        panelGridBotones1.add(btnTienda);
+        btnTienda.setPreferredSize(btnSize);
+        panelGridBotones2.add(btnConsultas);
+        btnConsultas.setPreferredSize(btnSize);
+        panelGridBotones2.add(btnAdmin);
+        btnAdmin.setPreferredSize(btnSize);
+        panelGridBotones2.add(btnBusqueda);
+        btnBusqueda.setPreferredSize(btnSize);
 
         JButton btnSalir = new JButton("Guardar y Salir");
+        btnSalir.setPreferredSize(btnSize);
 
         btnIngresar.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnTienda.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
@@ -51,10 +57,13 @@ public class MenuPrincipalFrame extends BaseFrame {
                 System.exit(0);
             }
         });
-
-        panelCentro.add(panelGridBotones, BorderLayout.CENTER);
-        panelCentro.add(btnSalir, BorderLayout.SOUTH);
-        add(panelCentro, BorderLayout.CENTER);
+        
+        
+        add(contenedorFilasBotones, BorderLayout.CENTER);
+        contenedorFilasBotones.add(panelGridBotones1);
+        contenedorFilasBotones.add(panelGridBotones2);
+        exitLayout.add(btnSalir);
+        add(exitLayout, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null);
         setVisible(true);
