@@ -15,7 +15,7 @@ public class InicioVista extends BaseFrame {
     public void mostrar() {
         setLayout(new BorderLayout(10, 10));
 
-        JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 0, 0));
 
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
@@ -24,13 +24,6 @@ public class InicioVista extends BaseFrame {
         JPanel panelGridBotones1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         JPanel panelGridBotones2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         JPanel exitLayout = new JPanel(new FlowLayout(FlowLayout.CENTER, 30,0));
-
-
-        JPanel panel = new JPanel(new GridLayout(7, 1, 10, 10));
-        panel.setBackground(Estilo.color_fondo);
-        
-        //margenes
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 120, 20, 120));
 
         JButton btnIngresar = new JButton("Ingresar Trabajo");
         JButton btnTienda = new JButton("Tienda Repuestos");
@@ -53,10 +46,6 @@ public class InicioVista extends BaseFrame {
         JButton btnSalir = new JButton("Guardar y Salir");
 
         btnSalir.setPreferredSize(btnSize);
-
-
-        btnIngresar.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
-        
         
         JButton[] botones = {btnIngresar, btnTienda, btnConsultas, btnAdmin, btnBusqueda};
         for (JButton b : botones) {
