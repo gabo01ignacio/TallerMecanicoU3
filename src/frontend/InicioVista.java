@@ -15,14 +15,17 @@ public class InicioVista extends BaseFrame {
     @Override
     public void mostrar() {
         setLayout(new BorderLayout(10, 10));
-
+        
+        //contenedorFilasBotones contiene los 2 FlowLayouts con los botones
         JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 0, 0));
         contenedorFilasBotones.setBorder(new EmptyBorder(200, 20, 200, 20));
-
+        
+        //titulo
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         add(lblTitulo, BorderLayout.NORTH);
 
+        //los 2 FlowLayouts son añadidos a contenedorFilasBotones
         JPanel panelGridBotones1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         JPanel panelGridBotones2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         JPanel exitLayout = new JPanel(new FlowLayout(FlowLayout.CENTER, 30,0));
@@ -33,6 +36,7 @@ public class InicioVista extends BaseFrame {
         JButton btnAdmin = new JButton("Administración");
         JButton btnBusqueda = new JButton("Búsqueda y Reportes");
 
+        //tamaño de los botones
         Dimension btnSize = new Dimension(300, 50);
         panelGridBotones1.add(btnIngresar);
         btnIngresar.setPreferredSize(btnSize);
@@ -46,7 +50,6 @@ public class InicioVista extends BaseFrame {
         btnBusqueda.setPreferredSize(btnSize);
 
         JButton btnSalir = new JButton("Guardar y Salir");
-
         btnSalir.setPreferredSize(btnSize);
         
         JButton[] botones = {btnIngresar, btnTienda, btnConsultas, btnAdmin, btnBusqueda};
@@ -79,7 +82,7 @@ public class InicioVista extends BaseFrame {
             }
         });
         
-        
+        //se añaden los paneles
         add(contenedorFilasBotones, BorderLayout.CENTER);
         contenedorFilasBotones.add(panelGridBotones1);
         contenedorFilasBotones.add(panelGridBotones2);
