@@ -18,7 +18,7 @@ public class InicioVista extends BaseFrame {
         
         //contenedorFilasBotones contiene los 2 FlowLayouts con los botones
         JPanel contenedorFilasBotones = new JPanel(new GridLayout(2, 1, 0, 0));
-        contenedorFilasBotones.setBorder(new EmptyBorder(200, 20, 200, 20));
+        contenedorFilasBotones.setBorder(new EmptyBorder(200, 20, 200, 20)); //solución parche, centra verticalmente las filas de los botones
         
         //titulo
         JLabel lblTitulo = new JLabel("Taller Mecánicoooo", SwingConstants.CENTER);
