@@ -21,7 +21,7 @@ public class TiendaRepuestosFrame extends BaseFrame {
 
     private DefaultListModel<String> modelCarro;
     private JList<String> listCarro;
-    private JLabel lblTotal;
+    private JLabel labeltotal;
 
     //control del total y lista
     private double totalVenta = 0.0;
@@ -49,16 +49,18 @@ public class TiendaRepuestosFrame extends BaseFrame {
         setLayout(new BorderLayout(10, 10));
 
         //titulo en el norte
-        JLabel lblTitulo = new JLabel("tienda de repuestos", SwingConstants.CENTER);
-        lblTitulo.setFont(Estilo.fuente_titulo);
-        add(lblTitulo, BorderLayout.NORTH);
+        JLabel labeltitulo = new JLabel("tienda de repuestos", SwingConstants.CENTER);
+        labeltitulo.setFont(Estilo.fuente_titulo);
+        add(labeltitulo, BorderLayout.NORTH);
 
         //panel central (dividido en 2: repuestos a la izquierda, carro a la derecha)
         JPanel panelCentro = new JPanel(new GridLayout(1, 2, 15, 0));
 
         //izquierda: repuestos
         JPanel panelIzquierdo = new JPanel(new BorderLayout(5, 5));
-        panelIzquierdo.setBorder(BorderFactory.createTitledBorder("repuestos"));
+        JLabel labelrepuestos = new JLabel("repuestos", SwingConstants.CENTER);
+        labelrepuestos.setFont(Estilo.fuente_boton);
+        panelIzquierdo.add(labelrepuestos, BorderLayout.NORTH);
 
         modelRepuestos = new DefaultListModel<>();
         listRepuestos = new JList<>(modelRepuestos);
@@ -71,21 +73,23 @@ public class TiendaRepuestosFrame extends BaseFrame {
 
         //botones de la izquierda
         JPanel panelBotonesIzquierda = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        JButton btnAgregar = new JButton("agregar al carro");
-        btnAgregar.setFont(Estilo.fuente_boton);
-        btnAgregar.addActionListener(e -> agregarAlCarro());
+        JButton botonagregar = new JButton("agregar al carro");
+        botonagregar.setFont(Estilo.fuente_boton);
+        botonagregar.addActionListener(e -> agregarAlCarro());
 
-        JButton btnCrearRepuesto = new JButton("crear repuesto");
-        btnCrearRepuesto.setFont(Estilo.fuente_boton);
-        btnCrearRepuesto.addActionListener(e -> crearNuevoRepuesto());
+        JButton botoncrearRepuesto = new JButton("crear repuesto");
+        botoncrearRepuesto.setFont(Estilo.fuente_boton);
+        botoncrearRepuesto.addActionListener(e -> crearNuevoRepuesto());
 
-        panelBotonesIzquierda.add(btnAgregar);
-        panelBotonesIzquierda.add(btnCrearRepuesto);
+        panelBotonesIzquierda.add(botonagregar);
+        panelBotonesIzquierda.add(botoncrearRepuesto);
         panelIzquierdo.add(panelBotonesIzquierda, BorderLayout.SOUTH);
 
 
         JPanel panelDerecho = new JPanel(new BorderLayout(5, 5));
-        panelDerecho.setBorder(BorderFactory.createTitledBorder("carro"));
+        JLabel labelCarro = new JLabel("carro", SwingConstants.CENTER);
+        labelCarro.setFont(Estilo.fuente_boton);
+        panelDerecho.add(labelCarro, BorderLayout.NORTH);
 
         modelCarro = new DefaultListModel<>();
         listCarro = new JList<>(modelCarro);
@@ -94,9 +98,9 @@ public class TiendaRepuestosFrame extends BaseFrame {
         JScrollPane scrollCarro = new JScrollPane(listCarro);
         panelDerecho.add(scrollCarro, BorderLayout.CENTER);
 
-        lblTotal = new JLabel("total: $0", SwingConstants.RIGHT);
-        lblTotal.setFont(Estilo.fuente_boton);
-        panelDerecho.add(lblTotal, BorderLayout.SOUTH);
+        labeltotal = new JLabel("total: $0", SwingConstants.RIGHT);
+        labeltotal.setFont(Estilo.fuente_boton);
+        panelDerecho.add(labeltotal, BorderLayout.SOUTH);
 
         panelCentro.add(panelIzquierdo);
         panelCentro.add(panelDerecho);
@@ -105,18 +109,18 @@ public class TiendaRepuestosFrame extends BaseFrame {
         //panel sur botones volver y pagar venta
         JPanel panelSur = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton btnVolver = new JButton("volver");
-        btnVolver.setFont(Estilo.fuente_boton);
-        btnVolver.addActionListener(e -> {
+        JButton botonvolver = new JButton("volver");
+        botonvolver.setFont(Estilo.fuente_boton);
+        botonvolver.addActionListener(e -> {
             dispose();
             new InicioVista(backend).mostrar();
         });
 
-        JButton btnPagar = new JButton("pagar venta");
-        btnPagar.addActionListener(e -> pagar());
+        JButton botonpagar = new JButton("pagar venta");
+        botonpagar.addActionListener(e -> pagar());
 
-        panelSur.add(btnVolver);
-        panelSur.add(btnPagar);
+        panelSur.add(botonvolver);
+        panelSur.add(botonpagar);
 
         add(panelSur, BorderLayout.SOUTH);
 
@@ -132,24 +136,24 @@ public class TiendaRepuestosFrame extends BaseFrame {
     }
 
     private void crearNuevoRepuesto() {
-        JTextField txtCod = new JTextField();
-        JTextField txtNom = new JTextField();
-        JTextField txtPre = new JTextField();
-        JTextField txtStk = new JTextField();
+        JTextField textocodigo = new JTextField();
+        JTextField textonombre = new JTextField();
+        JTextField textoprecio = new JTextField();
+        JTextField textostock = new JTextField();
 
         Object[] formulario = {
-            "codigo:", txtCod,
-            "nombre:", txtNom,
-            "precio:", txtPre,
-            "stock:", txtStk
+            "codigo:", textocodigo,
+            "nombre:", textonombre,
+            "precio:", textoprecio,
+            "stock:", textostock
         };
 
         int opcion = JOptionPane.showConfirmDialog(this, formulario, "registrar nuevo repuesto", JOptionPane.OK_CANCEL_OPTION);
         if (opcion == JOptionPane.OK_OPTION) {
-            String codigo = txtCod.getText().trim();
-            String nombre = txtNom.getText().trim();
-            String precioStr = txtPre.getText().trim();
-            String stockStr = txtStk.getText().trim();
+            String codigo = textocodigo.getText().trim();
+            String nombre = textonombre.getText().trim();
+            String precioStr = textoprecio.getText().trim();
+            String stockStr = textostock.getText().trim();
 
             if (codigo.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "debe llenar todos los campos", "error", JOptionPane.ERROR_MESSAGE);
@@ -184,36 +188,36 @@ public class TiendaRepuestosFrame extends BaseFrame {
 
 
     private void agregarAlCarro() {
-        int idx = listRepuestos.getSelectedIndex();
-        if (idx < 0) {
+        int i = listRepuestos.getSelectedIndex();
+        if (i < 0) {
             JOptionPane.showMessageDialog(this, "seleccione un repuesto de la lista de la izquierda.", "aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        repuesto r = listaRepuestos.get(idx);
+        repuesto r = listaRepuestos.get(i);
 
-        String cantStr = JOptionPane.showInputDialog(this, "ingrese cantidad a comprar", "cantidad", JOptionPane.QUESTION_MESSAGE);
-        if (cantStr == null || cantStr.trim().isEmpty()) return;
+        String cantidadStr = JOptionPane.showInputDialog(this, "ingrese cantidadidad a comprar", "cantidadidad", JOptionPane.QUESTION_MESSAGE);
+        if (cantidadStr == null || cantidadStr.trim().isEmpty()) return;
 
         try {
-            int cant = Integer.parseInt(cantStr.trim());
-            if (cant <= 0) {
-                JOptionPane.showMessageDialog(this, "la cantidad debe ser mayor a 0", "error", JOptionPane.ERROR_MESSAGE);
+            int cantidad = Integer.parseInt(cantidadStr.trim());
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(this, "la cantidadidad debe ser mayor a 0", "error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (cant > r.getStock()) {
+            if (cantidad > r.getStock()) {
                 JOptionPane.showMessageDialog(this, "el stock no es suficiente. stock disponible: " + r.getStock(), "error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            double subtotal = r.getPrecio() * cant;
+            double subtotal = r.getPrecio() * cantidad;
             totalVenta += subtotal;
 
-            r.disminuirStock(cant);
+            r.disminuirStock(cantidad);
             actualizarListaRepuestosUI();
 
-            modelCarro.addElement(r.getNombre() + " x" + cant + " = $" + (int)subtotal);
-            lblTotal.setText("total: $" + (int)totalVenta);
+            modelCarro.addElement(r.getNombre() + " x" + cantidad + " = $" + (int)subtotal);
+            labeltotal.setText("total: $" + (int)totalVenta);
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "ingrese un numero valido", "error", JOptionPane.ERROR_MESSAGE);
@@ -232,7 +236,7 @@ public class TiendaRepuestosFrame extends BaseFrame {
 
             modelCarro.clear();
             totalVenta = 0.0;
-            lblTotal.setText("total: $0");
+            labeltotal.setText("total: $0");
         }
     }
 }
