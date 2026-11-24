@@ -28,7 +28,7 @@ public class TiendaRepuestosFrame extends BaseFrame {
     private List<repuesto> listaRepuestos;
 
     public TiendaRepuestosFrame(menu backend) {
-        super("tienda de repuestos", backend);
+        super("Tienda de Repuestos", backend);
         setSize(750, 520);
         obtenerListaRepuestos();
     }
