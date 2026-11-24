@@ -196,13 +196,13 @@ public class TiendaRepuestosFrame extends BaseFrame {
 
         repuesto r = listaRepuestos.get(i);
 
-        String cantidadStr = JOptionPane.showInputDialog(this, "ingrese cantidadidad a comprar", "cantidadidad", JOptionPane.QUESTION_MESSAGE);
+        String cantidadStr = JOptionPane.showInputDialog(this, "ingrese cantidad a comprar", "cantidad", JOptionPane.QUESTION_MESSAGE);
         if (cantidadStr == null || cantidadStr.trim().isEmpty()) return;
 
         try {
             int cantidad = Integer.parseInt(cantidadStr.trim());
             if (cantidad <= 0) {
-                JOptionPane.showMessageDialog(this, "la cantidadidad debe ser mayor a 0", "error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "la cantidad debe ser mayor a 0", "error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (cantidad > r.getStock()) {
