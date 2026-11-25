@@ -76,8 +76,12 @@ public class InicioVista extends BaseFrame {
             dispose();
             new TiendaRepuestosFrame(backend).mostrar();
         });
-                
-        btnConsultas.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
+           
+        
+        btnConsultas.addActionListener(e -> {
+            dispose();
+            new ConsultasFrame(backend).mostrar();
+        });
         btnAdmin.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
         btnBusqueda.addActionListener(e -> JOptionPane.showMessageDialog(this, "aa"));
 
