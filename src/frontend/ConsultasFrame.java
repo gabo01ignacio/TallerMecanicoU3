@@ -1,4 +1,3 @@
-
 package frontend;
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.*;
 import modelos.cliente;
+import modelos.ordenesdetrabajo;
 import sistemas.menu;
 
 public class ConsultasFrame extends BaseFrame {
@@ -174,28 +174,50 @@ public class ConsultasFrame extends BaseFrame {
             JOptionPane.showMessageDialog(this, "ingrese un rut para buscar", "aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        //busqueda en los datos de prueba
-        cliente clienteencontrado = clientesprueba.get(rutbuscado);
+
+        //busqueda en los datos persistentes de backend (datos.dat) o en los datos de prueba
+        cliente clienteencontrado = null;
+        if (backend != null && backend.getClientes() != null) {
+            clienteencontrado = backend.getClientes().get(rutbuscado);
+        }
+
+        boolean esdebackend = (clienteencontrado != null);
+        if (clienteencontrado == null) {
+            clienteencontrado = clientesprueba.get(rutbuscado);
+        }
+
         if (clienteencontrado != null) {
             etiquetarutvalor.setText("rut: " + clienteencontrado.getRut());
             etiquetanombrevalor.setText("nombre: " + clienteencontrado.getNombre());
             etiquetatelefonovalor.setText("telefono: " + clienteencontrado.getTelefono());
 
-            List<String> listaordenes = historialprueba.get(rutbuscado);
             areatextohistorial.setText("");
-            if (listaordenes != null && !listaordenes.isEmpty()) {
-                for (String ordenitem : listaordenes) {
-                    areatextohistorial.append(ordenitem + "\n");
-                }
-            } else {
-                areatextohistorial.setText("el cliente no registra ordenes de trabajo");
-            }
 
-            Double monto = montototalprueba.get(rutbuscado);
-            if (monto != null) {
-                etiquetamontototal.setText("monto total gastado: $" + monto.intValue());
+            if (esdebackend) {
+                double montototalacumulado = 0.0;
+                boolean tieneordenes = false;
+
+                if (!tieneordenes) {
+                    areatextohistorial.setText("el cliente no registra ordenes de trabajo");
+                }
+
+                etiquetamontototal.setText("monto total gastado: $" + (int) montototalacumulado);
             } else {
-                etiquetamontototal.setText("monto total gastado: $0");
+                List<String> listaordenes = historialprueba.get(rutbuscado);
+                if (listaordenes != null && !listaordenes.isEmpty()) {
+                    for (String ordenitem : listaordenes) {
+                        areatextohistorial.append(ordenitem + "\n");
+                    }
+                } else {
+                    areatextohistorial.setText("el cliente no registra ordenes de trabajo");
+                }
+
+                Double monto = montototalprueba.get(rutbuscado);
+                if (monto != null) {
+                    etiquetamontototal.setText("monto total gastado: $" + monto.intValue());
+                } else {
+                    etiquetamontototal.setText("monto total gastado: $0");
+                }
             }
 
         } else {
@@ -205,8 +227,6 @@ public class ConsultasFrame extends BaseFrame {
             areatextohistorial.setText("");
             etiquetamontototal.setText("monto total gastado: $0");
         }
-        
-        
     }
     private void exportarPDF() {
         String rut = camporut.getText().trim();
