@@ -76,8 +76,7 @@ public class InicioVista extends BaseFrame {
         });
         
         btnMostrarTrabajos.addActionListener(e -> {
-            dispose();
-            new MostrarTrabajosFrame(backend).mostrar();
+            System.out.println("");
         });
 
         btnTienda.addActionListener(e -> {
