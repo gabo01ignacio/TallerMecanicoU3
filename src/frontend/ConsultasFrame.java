@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package frontend;
 
-/**
- *
- * @author 4rtur
- */
+package frontend;
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -146,6 +142,19 @@ public class ConsultasFrame extends BaseFrame {
         panelcentro.add(paneldetalles, BorderLayout.CENTER);
         add(panelcentro, BorderLayout.CENTER);
 
+        
+        
+        // boton pdf tarea 3
+        
+        JButton botonpdf = new JButton("exportar pdf");
+        botonpdf.setBackground(Estilo.color_principal);
+        botonpdf.setForeground(Color.WHITE);
+        botonpdf.setFont(Estilo.fuente_boton);
+        botonpdf.setOpaque(true);
+        botonpdf.addActionListener(e -> exportarPDF());
+        
+        
+        
         //sur: boton volver
         JPanel panelsur = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton botonvolver = new JButton("volver");
@@ -154,6 +163,7 @@ public class ConsultasFrame extends BaseFrame {
             new InicioVista(backend).mostrar();
         });
         panelsur.add(botonvolver);
+        panelsur.add(botonpdf);
         add(panelsur, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null);
@@ -198,6 +208,37 @@ public class ConsultasFrame extends BaseFrame {
             etiquetatelefonovalor.setText("telefono:");
             areatextohistorial.setText("");
             etiquetamontototal.setText("monto total gastado: $0");
+        }
+        
+        
+    }
+    private void exportarPDF() {
+        String rut = camporut.getText().trim();
+        if (rut.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "primero busque un cliente");
+            return;
+        }
+
+        try {
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream("cliente_" + rut + ".pdf"));
+            doc.open();
+            Paragraph parrafo = new Paragraph("Taller Mecanico");
+            parrafo.setAlignment(parrafo.ALIGN_CENTER);
+            doc.add(parrafo);
+            doc.add(new Paragraph("  "));
+            doc.add(new Paragraph(etiquetarutvalor.getText()));
+            doc.add(new Paragraph(etiquetanombrevalor.getText()));
+            doc.add(new Paragraph(etiquetatelefonovalor.getText()));
+            doc.add(new Paragraph("  "));
+            doc.add(new Paragraph(areatextohistorial.getText()));
+            doc.add(new Paragraph("  "));
+            doc.add(new Paragraph(etiquetamontototal.getText()));
+
+            doc.close();
+            JOptionPane.showMessageDialog(this, "pdf guardado");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "error al crear pdf");
         }
     }
 }
