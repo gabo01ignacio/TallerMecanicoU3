@@ -14,7 +14,6 @@ import sistemas.menu;
 
 
 public class TiendaRepuestosFrame extends BaseFrame {
-
     //componentes para la lista de repuestos ya existente
     private DefaultListModel<String> modelRepuestos;
     private JList<String> listRepuestos;

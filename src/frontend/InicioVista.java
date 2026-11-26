@@ -35,18 +35,21 @@ public class InicioVista extends BaseFrame {
         JButton btnConsultas = new JButton("Consultas");
         JButton btnAdmin = new JButton("Administración");
         JButton btnBusqueda = new JButton("Búsqueda y Reportes");
+        JButton btnMostrarTrabajos = new JButton("Mostrar Trabajos");
 
         //tamaño de los botones
         Dimension btnSize = new Dimension(300, 50);
         panelGridBotones1.add(btnIngresar);
         btnIngresar.setPreferredSize(btnSize);
+        panelGridBotones1.add(btnMostrarTrabajos);
+        btnMostrarTrabajos.setPreferredSize(btnSize);
         panelGridBotones1.add(btnTienda);
         btnTienda.setPreferredSize(btnSize);
         panelGridBotones2.add(btnConsultas);
         btnConsultas.setPreferredSize(btnSize);
         panelGridBotones2.add(btnAdmin);
         btnAdmin.setPreferredSize(btnSize);
-        panelGridBotones2.add(btnBusqueda);
+        panelGridBotones2.add(btnBusqueda); 
         btnBusqueda.setPreferredSize(btnSize);
 
         JButton btnSalir = new JButton("Guardar y Salir");
@@ -66,7 +69,7 @@ public class InicioVista extends BaseFrame {
         
         lblTitulo.setFont(Estilo.fuente_titulo);
         
-        // acciones
+        //acciones
         btnIngresar.addActionListener(e -> {
             dispose();
             new CrearTrabajoFrame(backend).mostrar();
