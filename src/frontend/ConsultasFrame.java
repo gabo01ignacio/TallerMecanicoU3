@@ -72,7 +72,6 @@ public class ConsultasFrame extends BaseFrame {
     @Override
     public void mostrar() {
         setLayout(new BorderLayout(10, 10));
-
         //norte: titulo de la ventana
         JLabel etiquetatitulo = new JLabel("consulta de clientes", SwingConstants.CENTER);
         etiquetatitulo.setFont(new Font("Helvetica", Font.BOLD, 20));
@@ -159,17 +158,14 @@ public class ConsultasFrame extends BaseFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
     private void buscarcliente() {
         String rutbuscado = camporut.getText().trim();
         if (rutbuscado.isEmpty()) {
             JOptionPane.showMessageDialog(this, "ingrese un rut para buscar", "aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         //busqueda en los datos de prueba
         cliente clienteencontrado = clientesprueba.get(rutbuscado);
-
         if (clienteencontrado != null) {
             etiquetarutvalor.setText("rut: " + clienteencontrado.getRut());
             etiquetanombrevalor.setText("nombre: " + clienteencontrado.getNombre());
@@ -201,4 +197,3 @@ public class ConsultasFrame extends BaseFrame {
         }
     }
 }
-
