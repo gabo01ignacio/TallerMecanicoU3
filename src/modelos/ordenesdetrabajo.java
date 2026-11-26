@@ -28,8 +28,7 @@ public class ordenesdetrabajo implements Serializable, registros {
     private ArrayList<repuesto> repuestosusado;
     private estadoorden estado; 
     private double costoTotal;
-    //cambios 
-    private cliente cliente;
+    //cambios
     private String observaciones = "";
     
     public String getObservaciones() {
