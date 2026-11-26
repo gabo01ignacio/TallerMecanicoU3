@@ -55,7 +55,7 @@ public class InicioVista extends BaseFrame {
         JButton btnSalir = new JButton("Guardar y Salir");
         btnSalir.setPreferredSize(btnSize);
         
-        JButton[] botones = {btnIngresar, btnTienda, btnConsultas, btnAdmin, btnBusqueda};
+        JButton[] botones = {btnIngresar, btnMostrarTrabajos, btnTienda, btnConsultas, btnAdmin, btnBusqueda};
         for (JButton b : botones) {
             b.setBackground(Estilo.color_principal);
             b.setForeground(Color.WHITE);
