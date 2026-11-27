@@ -178,7 +178,7 @@ public class ConsultasFrame extends BaseFrame {
         //busqueda en los datos persistentes de backend (datos.dat) o en los datos de prueba
         cliente clienteencontrado = null;
         if (backend != null && backend.getClientes() != null) {
-            clienteencontrado = backend.getClientes().get(rutbuscado);
+            clienteencontrado = backend.consultarCliente(rutbuscado);
         }
 
         boolean esdebackend = (clienteencontrado != null);
@@ -196,6 +196,14 @@ public class ConsultasFrame extends BaseFrame {
             if (esdebackend) {
                 double montototalacumulado = 0.0;
                 boolean tieneordenes = false;
+                
+                for (ordenesdetrabajo orden : backend.getOrdenes()) {
+                    if (orden.getObservaciones().contains("[RUT: " + rutbuscado + "]")) {
+                        areatextohistorial.append(orden.obtenerDetalleCompleto() + "\n");
+                        montototalacumulado += orden.getCostoTotal();
+                        tieneordenes = true;
+                }
+}
 
                 if (!tieneordenes) {
                     areatextohistorial.setText("el cliente no registra ordenes de trabajo");

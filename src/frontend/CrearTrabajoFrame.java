@@ -160,7 +160,7 @@ public class CrearTrabajoFrame extends BaseFrame {
 
             mecanico mec = backend.getMecanicos().get(cbMecanico.getSelectedIndex());
             ordenesdetrabajo ot = backend.crearTrabajo(nuevo, rut, nombre, telefono, mec, costo);
-            ot.setObservaciones(txtObservaciones.getText().trim());
+            ot.setObservaciones("[RUT: " + rut + "] " + txtObservaciones.getText().trim());
             JOptionPane.showMessageDialog(this,
                 "Orden: " + ot.getNumeroorden() +
                 "\nVehículo: " + nuevo.getPatente() +
